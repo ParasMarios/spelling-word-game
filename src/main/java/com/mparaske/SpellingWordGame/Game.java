@@ -26,10 +26,10 @@ public class Game {
         reader.close();
     }
 
-    public void play() {
+    public void play(int numberOfWords) {
         Scanner scanner = new Scanner(System.in);
 
-        for (Word word : words) {
+        for (int i = 0; i < numberOfWords; i++) {
             Word randomWord = words.get(random.nextInt(words.size()));
             randomWord.speak();
 
@@ -42,6 +42,6 @@ public class Game {
                 System.out.println("Incorrect.");
             }
         }
-        scanner.close();
+        System.out.println("Game Over!");
     }
 }

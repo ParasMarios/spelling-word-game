@@ -4,12 +4,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.IOException;
+import java.util.Scanner;
 
 @SpringBootApplication
 public class SpellingWordGameApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(SpellingWordGameApplication.class, args);
+        Scanner scanner = new Scanner(System.in);
 
         Game game;
         try {
@@ -17,7 +19,18 @@ public class SpellingWordGameApplication {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        game.play();
-    }
 
+        String playAgain = "y";
+        while (playAgain.equalsIgnoreCase("y")) {
+            System.out.println("How many words would you like to practice?");
+            int numberOfWords = scanner.nextInt();
+
+            game.play(numberOfWords);
+
+            System.out.println("Would you like to play again? (y/n)");
+            playAgain = scanner.next();
+        }
+        scanner.close();
+        System.exit(0);
+    }
 }
