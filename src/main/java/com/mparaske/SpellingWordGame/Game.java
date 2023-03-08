@@ -28,6 +28,8 @@ public class Game {
 
     public void play(int numberOfWords) {
         Scanner scanner = new Scanner(System.in);
+        int correctWords = 0;
+        int points = 0;
 
         for (int i = 0; i < numberOfWords; i++) {
             Word randomWord = words.get(random.nextInt(words.size()));
@@ -37,11 +39,15 @@ public class Game {
 
             if (input.equalsIgnoreCase(randomWord.getWord())) {
                 randomWord.setCorrect(true);
+                correctWords++;
+                points += 10;
                 System.out.println("Correct!");
+                System.out.println("Points: " + points);
             } else {
                 System.out.println("Incorrect.");
             }
         }
         System.out.println("Game Over!");
+        System.out.println("You got " + correctWords + " out of " + numberOfWords + " correct.");
     }
 }
