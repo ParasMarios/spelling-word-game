@@ -20,6 +20,10 @@ public class SpellingWordGameApplication {
             throw new RuntimeException(e);
         }
 
+        System.out.println("Please enter your nickname: ");
+        String nickname = scanner.nextLine();
+        System.out.println("Welcome " + nickname + "!");
+        System.out.println("Let's start the game!");
         String playAgain = "y";
         while (playAgain.equalsIgnoreCase("y")) {
             System.out.println("How many words would you like to practice?");
