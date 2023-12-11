@@ -15,7 +15,7 @@ public class SpellingWordGameApplication {
 
         Game game;
         try {
-            game = new Game("C:\\Users\\mario\\Programming\\SpellingWordGame\\SpellingWordGame\\src\\main\\resources\\words.txt");
+            game = new Game("src/main/resources/words.txt");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
