@@ -17,6 +17,7 @@ public class SpellingWordGameApplication {
         try {
             game = new Game("src/main/resources/words.txt");
         } catch (IOException e) {
+            System.out.println("Error reading file.");
             throw new RuntimeException(e);
         }
 
@@ -26,8 +27,14 @@ public class SpellingWordGameApplication {
         System.out.println("Let's start the game!");
         String playAgain = "y";
         while (playAgain.equalsIgnoreCase("y")) {
-            System.out.println("How many words would you like to practice?");
+            int totalWordsInFile = game.getTotalWords();
+            System.out.println("How many words would you like to practice? (Maximum: " + totalWordsInFile + ")");
             int numberOfWords = scanner.nextInt();
+
+            if (numberOfWords > totalWordsInFile) {
+                System.out.println("You can't practice more words than available in the file.");
+                continue;  // Go back to the beginning of the loop
+            }
 
             game.play(numberOfWords);
 
@@ -38,3 +45,4 @@ public class SpellingWordGameApplication {
         System.exit(0);
     }
 }
+

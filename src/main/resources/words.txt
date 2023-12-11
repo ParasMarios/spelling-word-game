@@ -3,3 +3,4 @@ banana
 house
 tree
 car
+bike
