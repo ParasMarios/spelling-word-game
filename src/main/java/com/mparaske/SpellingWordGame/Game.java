@@ -52,19 +52,37 @@ public class Game {
             usedIndices.add(randomIndex);
 
             Word randomWord = words.get(randomIndex);
-            randomWord.speak();
 
-            String input = scanner.nextLine();
+            // Allow the user to hear the word again with a limit of 3 retries
+            int retries = 3;
+            boolean correctInput = false;
+            do {
+                randomWord.speak();
+                String input = scanner.nextLine();
 
-            if (input.equalsIgnoreCase(randomWord.getWord())) {
-                randomWord.setCorrect(true);
-                correctWords++;
-                points += 10;
-                System.out.println("Correct!");
-                System.out.println("Points: " + points);
-            } else {
-                System.out.println("Incorrect.");
-            }
+                if (input.equalsIgnoreCase(randomWord.getWord())) {
+                    randomWord.setCorrect(true);
+                    correctWords++;
+                    points += 10;
+                    System.out.println("Correct!");
+                    System.out.println("Points: " + points);
+                    correctInput = true; // Exit the loop
+                } else {
+                    retries--;
+                    if (retries > 0) {
+                        System.out.println("Would you like to hear the word again? (y/n)");
+                        String hearAgainInput = scanner.nextLine();
+                        if (hearAgainInput.equalsIgnoreCase("y")) {
+                            System.out.println("Remaining retries: " + retries);
+                        } else {
+                            correctInput = true; // Exit the loop
+                        }
+                    } else {
+                        System.out.println("Out of retries. The correct word was: " + randomWord.getWord());
+                        correctInput = true; // Exit the loop
+                    }
+                }
+            } while (!correctInput);
         }
 
         usedIndices.clear(); // Clear used indices for the next game
